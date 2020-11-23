@@ -17,6 +17,9 @@ import os
 from threading import Thread
 import time
 
+from config import INPUT_SIZE, N_CLASSES
+
+
 class IMAGE(Structure):
     _fields_ = [("w", c_int),
                 ("h", c_int),
@@ -127,7 +130,7 @@ def loop_detect(detect_m, video_path):
         # image = resizePadding(image, 512, 512)
         # frame_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = cv2.resize(image,
-                           (512, 512),
+                           (INPUT_SIZE, INPUT_SIZE),
                            interpolation=cv2.INTER_LINEAR)
         detections = detect_m.detect(image, need_resize=False)
         cnt += 1
@@ -151,15 +154,15 @@ def loop_detect(detect_m, video_path):
 
 class YOLO4RT(object):
     def __init__(self,
-                 input_size=512,
-                 weight_file='./yolo4_fp16.rt',
+                 input_size=INPUT_SIZE,
+                 weight_file="./yolo4_fp16.trt",
                  metaPath='Models/yolo4/coco.data',
                  nms=0.2,
                  conf_thres=0.3,
                  device='cuda'):
         self.input_size = input_size
-        self.metaMain =None
-        self.model = load_network(weight_file.encode("ascii"), 80, 1)
+        self.metaMain = None
+        self.model = load_network(weight_file.encode("ascii"), N_CLASSES, 1)
         self.darknet_image = make_image(input_size, input_size, 3)
         self.thresh = conf_thres
         # self.resize_fn = ResizePadding(input_size, input_size)
