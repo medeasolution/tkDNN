@@ -59,13 +59,18 @@ tk::dnn::Yolo3Detection* load_network(char* net_cfg, int n_classes, int n_batch)
     return detNN;
 }
 #include <typeinfo>
-void do_inference(tk::dnn::Yolo3Detection *net, image im)
+void do_inference(tk::dnn::Yolo3Detection *net, image im_1, image im_2, image im_3, image im_4)
 {
     std::vector<cv::Mat> batch_dnn_input;
-
-    cv::Mat frame(im.h, im.w, CV_8UC3, (unsigned char*)im.data);
-    batch_dnn_input.push_back(frame);
-    net->update(batch_dnn_input, 1);
+    cv::Mat frame_1(im_1.h, im_1.w, CV_8UC3, (unsigned char*)im_1.data);
+    cv::Mat frame_2(im_2.h, im_2.w, CV_8UC3, (unsigned char*)im_2.data);
+    cv::Mat frame_3(im_3.h, im_3.w, CV_8UC3, (unsigned char*)im_3.data);
+    cv::Mat frame_4(im_4.h, im_4.w, CV_8UC3, (unsigned char*)im_4.data);
+    batch_dnn_input.push_back(frame_1);
+    batch_dnn_input.push_back(frame_2);
+    batch_dnn_input.push_back(frame_3);
+    batch_dnn_input.push_back(frame_4);
+    net->update(batch_dnn_input, 4);
 
 }
 
