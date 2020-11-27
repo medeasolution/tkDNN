@@ -114,6 +114,8 @@ add_executable(demo demo/demo/demo.cpp)
 target_link_libraries(demo tkDNN)
 
 option(BUILD_SHARED_LIBS "Specifies the type of libraries (SHARED or STATIC) to build" ON)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
 if (BUILD_SHARED_LIBS)
     add_library(darknetTR SHARED demo/demo/darknetTR.cpp)
     target_compile_definitions(darknetTR PRIVATE LIB_EXPORTS=1)

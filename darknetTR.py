@@ -10,10 +10,8 @@
 """
 
 from ctypes import *
+
 import cv2
-import numpy as np
-import argparse
-import os
 from threading import Thread
 import time
 
@@ -56,8 +54,13 @@ do_inference = lib.do_inference
 do_inference.argtypes = [c_void_p, IMAGE, IMAGE, IMAGE, IMAGE]
 
 get_network_boxes = lib.get_network_boxes
-get_network_boxes.argtypes = [c_void_p, c_float, c_int, POINTER(c_int)]
-get_network_boxes.restype = POINTER(DETECTION)
+# POINTER(c_int)
+get_network_boxes.argtypes = [c_void_p, c_float, c_int, py_object, py_object, py_object, py_object]
+# get_network_boxes.restype = POINTER(DETECTION)
+
+main_loop = lib.main_loop
+main_loop.argtypes = [c_char_p, c_int]
+
 
 # cfg = 'yolo4_fp16.rt'
 # netMain = load_network(cfg.encode("ascii"), 80, 1)  # batch size = 1
@@ -106,15 +109,23 @@ def resizePadding(image, height, width):
     return image
 
 def detect_image(net, meta, darknet_images, thresh=.5):
-    num = c_int(0)
-
-    pnum = pointer(num)
     do_inference(net, *darknet_images)
-    dets = get_network_boxes(net, 0.5, 0, pnum)
+
+    person = []
+    mask = []
+    no_mask = []
+    tmp_bbox = [0, 0, 0, 0]
+    # num = c_int(0)
+
+    # pnum = pointer(num)
+    get_network_boxes(net, 0.3, 0, person, mask, no_mask, tmp_bbox)
+    # out = {"no_mask": no_mask, "mask": mask, "person": person}
+    # print(out)
     res = []
-    for i in range(pnum[0]):
-        b = dets[i].bbox
-        res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
+    # for i in range(pnum[0]):
+    #     print(dets[i].prob)
+    #     b = dets[i].bbox
+    #     res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
 
     return res
 
@@ -123,24 +134,24 @@ def loop_detect(detect_m, video_path):
     stream = cv2.VideoCapture(video_path)
     start = time.time()
     cnt = 0
+    print("starting main loop...")
     while stream.isOpened():
         image_batch = []
-        for i in range(4):
-            ret, image = stream.read()
-            if ret is False:
-                break
-            # image = resizePadding(image, 512, 512)
-            # frame_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = cv2.resize(image,
-                               (INPUT_SIZE, INPUT_SIZE),
-                               interpolation=cv2.INTER_LINEAR)
-            image_batch.append(image)
-        detections = detect_m.detect(image_batch, need_resize=False)
+        ret, image = stream.read()
+        if not ret:
+            break
+        # image = resizePadding(image, 512, 512)
+        # frame_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = cv2.resize(image,
+                           (INPUT_SIZE, INPUT_SIZE),
+                           interpolation=cv2.INTER_LINEAR)
+        image_batch.append(image)
+        detections = detect_m.detect(image_batch)
+        # for det in detections:
+        #     print(det)
         cnt += 1
-        for det in detections:
-            print(det)
     end = time.time()
-    print("frame:{},time:{:.3f},FPS:{:.2f}".format(cnt, end-start, cnt/(end-start)))
+    print("frame:{},time:{:.3f},FPS:{:.2f}".format(cnt, end - start, cnt / (end - start)))
     stream.release()
 
 
@@ -191,23 +202,14 @@ class YOLO4RT(object):
         except Exception as e_s:
             print(e_s)
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='tkDNN detect')
-    parser.add_argument('weight', help='rt file path')
-    parser.add_argument('--video',  type=str, help='video path')
-    args = parser.parse_args()
-
-    return args
-
-
 
 if __name__ == '__main__':
-    args = parse_args()
-    detect_m = YOLO4RT(weight_file=args.weight)
-    t = Thread(target=loop_detect, args=(detect_m, args.video), daemon=True)
-
-    # thread1 = myThread(loop_detect, [detect_m])
-
-    # Start new Threads
+    input_path = "/home/alex/Projects/jd/race.mp4"
+    detect_m = YOLO4RT(weight_file="/home/alex/Projects/jd/yolo4_int8.rt")
+    t = Thread(target=loop_detect, args=(detect_m, input_path), daemon=True)
+    #
+    # # thread1 = myThread(loop_detect, [detect_m])
+    #
+    # # Start new Threads
     t.start()
     t.join()

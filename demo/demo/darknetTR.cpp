@@ -1,7 +1,9 @@
 #include "darknetTR.h"
-
+#define PY_SSIZE_T_CLEAN
+#include "python3.8/Python.h"
+#include <stdio.h>
 bool gRun;
-bool SAVE_RESULT = false;
+bool SAVE_RESULT = true;
 
 void sig_handler(int signo) {
     std::cout<<"request gateway stop\n";
@@ -74,30 +76,144 @@ void do_inference(tk::dnn::Yolo3Detection *net, image im_1, image im_2, image im
 
 }
 
+void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
+    char out[100];
 
-detection* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, int *pnum)
-{
+
     std::vector<std::vector<tk::dnn::box>> batchDetected;
     batchDetected = net->get_batch_detected();
-    int nboxes =0;
-    std::vector<std::string> classesName = net->get_classesName();
-    detection* dets = (detection*)xcalloc(batchDetected[batch_num].size(), sizeof(detection));
-    for (int i = 0; i < batchDetected[batch_num].size(); ++i)
-    {
-        if (batchDetected[batch_num][i].prob > thresh)
-        {
-            dets[nboxes].cl = batchDetected[batch_num][i].cl;
-            strcpy(dets[nboxes].name,classesName[dets[nboxes].cl].c_str());
-            dets[nboxes].bbox.x = batchDetected[batch_num][i].x;
-            dets[nboxes].bbox.y = batchDetected[batch_num][i].y;
-            dets[nboxes].bbox.w = batchDetected[batch_num][i].w;
-            dets[nboxes].bbox.h = batchDetected[batch_num][i].h;
-            dets[nboxes].prob = batchDetected[batch_num][i].prob;
-            nboxes += 1;
+
+//    PyListObject* person = (PyListObject*) PyList_New((Py_ssize_t)((long) batchDetected[batch_num].size()));
+//    PyListObject* mask= (PyListObject*) PyList_New((Py_ssize_t)((long) batchDetected[batch_num].size()));
+//    PyListObject* no_mask= (PyListObject*) PyList_New((Py_ssize_t)((long) batchDetected[batch_num].size()));
+    for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
+
+        if (batchDetected[batch_num][i].prob > thresh) {
+            // Build bbox
+//            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+//            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
+//            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
+//            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
+//            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
+//            sprintf(out, "%f\n", batchDetected[batch_num][i].x);
+//            write(1, out, strlen(out));
+//            sprintf(out, "%f\n", batchDetected[batch_num][i].y);
+//            write(1, out, strlen(out));
+//            sprintf(out, "%f\n", batchDetected[batch_num][i].w);
+//            write(1, out, strlen(out));
+//            sprintf(out, "%f\n", batchDetected[batch_num][i].h);
+//            write(1, out, strlen(out));
+
+            // Detection: Add class, confidence and bbox to a tuple
+            PyListObject *curr_det = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+            PyList_Append((PyObject*) curr_det, (PyObject*) PyLong_FromLong((long) batchDetected[batch_num][i].cl)); //remove cl, just for debug
+            PyList_Append((PyObject*) curr_det, (PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].prob));
+//            PyList_Append((PyObject*) curr_det, (PyObject*) bbox);
+
+            // Add the detection to the appropriate tuple
+            if (batchDetected[batch_num][i].cl == 2) {
+                PyList_Append((PyObject*) person, (PyObject*) curr_det);
+            } else if (batchDetected[batch_num][i].cl == 1) {
+                PyList_Append((PyObject*) mask, (PyObject*) curr_det);
+            } else if (batchDetected[batch_num][i].cl == 0) {
+                PyList_Append((PyObject*) no_mask, (PyObject*) curr_det);
+            }
         }
     }
-    if (pnum) *pnum = nboxes;
-    return dets;
+//    Py_CLEAR(bbox);
+//    Py_CLEAR(curr_det);
+//    PyDictObject* final_dets = (PyDictObject*) PyDict_New();
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("mask\0"),(PyObject*) mask);
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
+}
+
+//detection* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, int *pnum)
+//{
+//    std::vector<std::vector<tk::dnn::box>> batchDetected;
+//    batchDetected = net->get_batch_detected();
+//    int nboxes =0;
+//    std::vector<std::string> classesName = net->get_classesName();
+//    detection* dets = (detection*)xcalloc(batchDetected[batch_num].size(), sizeof(detection));
+//    for (int i = 0; i < batchDetected[batch_num].size(); ++i)
+//    {
+//        if (batchDetected[batch_num][i].prob > thresh)
+//        {
+//            dets[nboxes].cl = batchDetected[batch_num][i].cl;
+//            strcpy(dets[nboxes].name, classesName[dets[nboxes].cl].c_str());
+//            dets[nboxes].bbox.x = batchDetected[batch_num][i].x;
+//            dets[nboxes].bbox.y = batchDetected[batch_num][i].y;
+//            dets[nboxes].bbox.w = batchDetected[batch_num][i].w;
+//            dets[nboxes].bbox.h = batchDetected[batch_num][i].h;
+//            dets[nboxes].prob = batchDetected[batch_num][i].prob;
+//            nboxes += 1;
+//        }
+//    }
+//    if (pnum) *pnum = nboxes;
+//    return dets;
+//}
+
+void main_loop(char *input, int n_batch) {
+    tk::dnn::Yolo3Detection yolo;
+    tk::dnn::DetectionNN *detNN;
+    detNN = &yolo;
+
+    float conf_thresh = 0.3;
+    std::string net = "/home/alex/Projects/jd/yolo4_int8.rt";
+    detNN->init(net, 3, n_batch, conf_thresh);
+
+    cv::VideoCapture cap(input); //input video
+
+    cv::VideoWriter resultVideo;
+    int w = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+    int h = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+    resultVideo.open("result.mp4", cv::VideoWriter::fourcc('M','P','4','V'), 30, cv::Size(w, h)); //output video
+
+    std::vector<cv::Mat> batch_frame;
+    std::vector<cv::Mat> batch_dnn_input;
+    cv::Mat frame;
+
+    while(1) {
+        batch_dnn_input.clear();
+        batch_frame.clear();
+
+        for(int bi=0; bi< n_batch; ++bi){
+            cap >> frame;
+            if(!frame.data)
+                break;
+
+            batch_frame.push_back(frame);
+
+            // this will be resized to the net format
+            batch_dnn_input.push_back(frame.clone());
+        }
+        if(!frame.data)
+            break;
+
+        //inference
+        detNN->update(batch_dnn_input, n_batch);
+        detNN->draw(batch_frame);
+
+//        if(show){
+//            for(int bi=0; bi< n_batch; ++bi){
+//                cv::imshow("detection", batch_frame[bi]);
+//                cv::waitKey(1);
+//            }
+//        }
+        if(SAVE_RESULT){
+            for(int i = 0; i < n_batch; i++){
+                resultVideo << batch_frame[i];
+            }
+        }
+    }
+    double mean = 0;
+
+    std::cout<<COL_GREENB<<"\n\nTime stats:\n";
+    std::cout<<"Min: "<<*std::min_element(detNN->stats.begin(), detNN->stats.end())/n_batch<<" ms\n";
+    std::cout<<"Max: "<<*std::max_element(detNN->stats.begin(), detNN->stats.end())/n_batch<<" ms\n";
+    for(int i=0; i<detNN->stats.size(); i++) mean += detNN->stats[i]; mean /= detNN->stats.size();
+    std::cout<<"Avg: "<<mean/n_batch<<" ms\t"<<1000/(mean/n_batch)<<" FPS\n"<<COL_END;
+
 }
 }
 
