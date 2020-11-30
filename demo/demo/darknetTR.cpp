@@ -77,8 +77,7 @@ void do_inference(tk::dnn::Yolo3Detection *net, image im_1, image im_2, image im
 }
 
 void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
-    char out[100];
-
+//    char out[100];
 
     std::vector<std::vector<tk::dnn::box>> batchDetected;
     batchDetected = net->get_batch_detected();
@@ -127,6 +126,36 @@ void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num
 //    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("mask\0"),(PyObject*) mask);
 //    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
 }
+//void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
+//    std::vector<std::vector<tk::dnn::box>> batchDetected;
+//    batchDetected = net->get_batch_detected();
+//
+//    for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
+//
+//        if (batchDetected[batch_num][i].prob > thresh) {
+//            // Build bbox
+//            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
+//            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
+//            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
+//            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
+//
+//            // Detection: Add class, confidence and bbox to a tuple
+//            PyListObject *curr_det = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+//            PyList_Append((PyObject*) curr_det, (PyObject*) PyLong_FromLong((long) batchDetected[batch_num][i].cl)); //remove cl, just for debug
+//            PyList_Append((PyObject*) curr_det, (PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].prob));
+//            PyList_Append((PyObject*) curr_det, (PyObject*) bbox);
+//
+//            // Add the detection to the appropriate tuple
+//            if (batchDetected[batch_num][i].cl == 2) {
+//                PyList_Append((PyObject*) person, (PyObject*) curr_det);
+//            } else if (batchDetected[batch_num][i].cl == 1) {
+//                PyList_Append((PyObject*) mask, (PyObject*) curr_det);
+//            } else if (batchDetected[batch_num][i].cl == 0) {
+//                PyList_Append((PyObject*) no_mask, (PyObject*) curr_det);
+//            }
+//        }
+//    }
+//}
 
 //detection* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, int *pnum)
 //{
