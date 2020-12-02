@@ -84,10 +84,10 @@ void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num
         if (batchDetected[batch_num][i].prob > thresh) {
             // Build bbox
 //            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 0L);
-//            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
-//            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
-//            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
-//            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
+            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
+            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
+            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
+            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
 //            sprintf(out, "%f\n", batchDetected[batch_num][i].x);
 //            write(1, out, strlen(out));
 //            sprintf(out, "%f\n", batchDetected[batch_num][i].y);
@@ -101,7 +101,7 @@ void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num
             PyListObject *curr_det = (PyListObject*) PyList_New((Py_ssize_t) 0L);
             PyList_Append((PyObject*) curr_det, (PyObject*) PyLong_FromLong((long) batchDetected[batch_num][i].cl)); //remove cl, just for debug
             PyList_Append((PyObject*) curr_det, (PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].prob));
-//            PyList_Append((PyObject*) curr_det, (PyObject*) bbox);
+            PyList_Append((PyObject*) curr_det, (PyObject*) bbox);
 
             // Add the detection to the appropriate tuple
             if (batchDetected[batch_num][i].cl == 2) {
