@@ -95,7 +95,7 @@ void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num
                 PyList_Append((PyObject*) no_mask, (PyObject*) bbox);
             }
             // New bbox for next iteration
-            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 4L);
         }
     }
 
