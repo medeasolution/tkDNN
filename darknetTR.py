@@ -55,8 +55,9 @@ do_inference.argtypes = [c_void_p, IMAGE, IMAGE, IMAGE, IMAGE]
 
 get_network_boxes = lib.get_network_boxes
 # POINTER(c_int)
-get_network_boxes.argtypes = [c_void_p, c_float, c_int, py_object, py_object, py_object, py_object]
-# get_network_boxes.restype = POINTER(DETECTION)
+# get_network_boxes.argtypes = [c_void_p, c_float, c_int, py_object, py_object, py_object, py_object]
+get_network_boxes.argtypes = [c_void_p, c_float, c_int, POINTER(c_int)]
+get_network_boxes.restype = POINTER(DETECTION)
 
 main_loop = lib.main_loop
 main_loop.argtypes = [c_char_p, c_int]
@@ -111,21 +112,22 @@ def resizePadding(image, height, width):
 def detect_image(net, meta, darknet_images, thresh=.5):
     do_inference(net, *darknet_images)
 
-    person = []
-    mask = []
-    no_mask = []
-    tmp_bbox = [0, 0, 0, 0]
-    # num = c_int(0)
+    # person = []
+    # mask = []
+    # no_mask = []
+    # tmp_bbox = [0, 0, 0, 0]
+    num = c_int(0)
 
-    # pnum = pointer(num)
-    get_network_boxes(net, 0.3, 0, person, mask, no_mask, tmp_bbox)
-    # out = {"no_mask": no_mask, "mask": mask, "person": person}
+    pnum = pointer(num)
+    # get_network_boxes(net, 0.3, 0, person, mask, no_mask, tmp_bbox)
+    dets = get_network_boxes(net, 0.3, 0, pnum)
+    # out = {"no_mask": no_mask, "face_mask": mask, "person": person}
     # print(out)
     res = []
-    # for i in range(pnum[0]):
-    #     print(dets[i].prob)
-    #     b = dets[i].bbox
-    #     res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
+    for i in range(pnum[0]):
+        # print(dets[i].prob)
+        b = dets[i].bbox
+        res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
 
     return res
 
