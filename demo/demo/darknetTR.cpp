@@ -1,6 +1,6 @@
 #include "darknetTR.h"
 #define PY_SSIZE_T_CLEAN
-#include "python3.8/Python.h"
+#include "python3.7/Python.h"
 #include <stdio.h>
 bool gRun;
 bool SAVE_RESULT = true;
