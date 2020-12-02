@@ -70,66 +70,66 @@ void do_inference(tk::dnn::Yolo3Detection *net, image im)
 
 }
 
-//void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
-////    char out[100];
-//
-//    std::vector<std::vector<tk::dnn::box>> batchDetected;
-//    batchDetected = net->get_batch_detected();
-//
-//    for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
-//
-//        if (batchDetected[batch_num][i].prob > thresh) {
-//            // Build bbox
-//
-//            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
-//            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
-//            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
-//            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
-//
-//            // Add the bbox to the appropriate list
-//            if (batchDetected[batch_num][i].cl == 2) {
-//                PyList_Append((PyObject*) person, (PyObject*) bbox);
-//            } else if (batchDetected[batch_num][i].cl == 1) {
-//                PyList_Append((PyObject*) mask, (PyObject*) bbox);
-//            } else if (batchDetected[batch_num][i].cl == 0) {
-//                PyList_Append((PyObject*) no_mask, (PyObject*) bbox);
-//            }
-//            // New bbox for next iteration
-//            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 0L);
-//        }
-//    }
-//
-////    PyDictObject* final_dets = (PyDictObject*) PyDict_New();
-////    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
-////    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("mask\0"),(PyObject*) mask);
-////    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
-//}
+void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
+//    char out[100];
 
-
-detection* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, int *pnum)
-{
     std::vector<std::vector<tk::dnn::box>> batchDetected;
     batchDetected = net->get_batch_detected();
-    int nboxes =0;
-    std::vector<std::string> classesName = net->get_classesName();
-    detection* dets = (detection*)xcalloc(batchDetected[batch_num].size(), sizeof(detection));
-    for (int i = 0; i < batchDetected[batch_num].size(); ++i)
-    {
-        if (batchDetected[batch_num][i].prob > thresh)
-        {
-            dets[nboxes].cl = batchDetected[batch_num][i].cl;
-            strcpy(dets[nboxes].name, classesName[dets[nboxes].cl].c_str());
-            dets[nboxes].bbox.x = batchDetected[batch_num][i].x;
-            dets[nboxes].bbox.y = batchDetected[batch_num][i].y;
-            dets[nboxes].bbox.w = batchDetected[batch_num][i].w;
-            dets[nboxes].bbox.h = batchDetected[batch_num][i].h;
-            dets[nboxes].prob = batchDetected[batch_num][i].prob;
-            nboxes += 1;
+
+    for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
+
+        if (batchDetected[batch_num][i].prob > thresh) {
+            // Build bbox
+
+            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
+            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
+            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
+            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
+
+            // Add the bbox to the appropriate list
+            if (batchDetected[batch_num][i].cl == 2) {
+                PyList_Append((PyObject*) person, (PyObject*) bbox);
+            } else if (batchDetected[batch_num][i].cl == 1) {
+                PyList_Append((PyObject*) mask, (PyObject*) bbox);
+            } else if (batchDetected[batch_num][i].cl == 0) {
+                PyList_Append((PyObject*) no_mask, (PyObject*) bbox);
+            }
+            // New bbox for next iteration
+            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 0L);
         }
     }
-    if (pnum) *pnum = nboxes;
-    return dets;
+
+//    PyDictObject* final_dets = (PyDictObject*) PyDict_New();
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("mask\0"),(PyObject*) mask);
+//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
 }
+
+
+//detection* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, int *pnum)
+//{
+//    std::vector<std::vector<tk::dnn::box>> batchDetected;
+//    batchDetected = net->get_batch_detected();
+//    int nboxes =0;
+//    std::vector<std::string> classesName = net->get_classesName();
+//    detection* dets = (detection*)xcalloc(batchDetected[batch_num].size(), sizeof(detection));
+//    for (int i = 0; i < batchDetected[batch_num].size(); ++i)
+//    {
+//        if (batchDetected[batch_num][i].prob > thresh)
+//        {
+//            dets[nboxes].cl = batchDetected[batch_num][i].cl;
+//            strcpy(dets[nboxes].name, classesName[dets[nboxes].cl].c_str());
+//            dets[nboxes].bbox.x = batchDetected[batch_num][i].x;
+//            dets[nboxes].bbox.y = batchDetected[batch_num][i].y;
+//            dets[nboxes].bbox.w = batchDetected[batch_num][i].w;
+//            dets[nboxes].bbox.h = batchDetected[batch_num][i].h;
+//            dets[nboxes].prob = batchDetected[batch_num][i].prob;
+//            nboxes += 1;
+//        }
+//    }
+//    if (pnum) *pnum = nboxes;
+//    return dets;
+//}
 
 void main_loop(char *input, int n_batch) {
     tk::dnn::Yolo3Detection yolo;
