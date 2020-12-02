@@ -9,7 +9,7 @@ bool Yolo3Detection::init(const std::string& tensor_path, const int n_classes, c
     std::cout<<(tensor_path).c_str()<<"\n";
     netRT = new tk::dnn::NetworkRT(NULL, (tensor_path).c_str() );
 
-    nBatches = n_batches;
+    nBatches = 1;
     confThreshold = conf_thresh;
     tk::dnn::dataDim_t idim = netRT->input_dim;    
     idim.n = nBatches;
