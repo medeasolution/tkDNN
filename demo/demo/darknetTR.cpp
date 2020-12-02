@@ -1,6 +1,6 @@
 #include "darknetTR.h"
 #define PY_SSIZE_T_CLEAN
-#include "python3.7/Python.h"
+#include "python3.8/Python.h"
 #include <stdio.h>
 bool gRun;
 bool SAVE_RESULT = true;
@@ -70,17 +70,22 @@ void do_inference(tk::dnn::Yolo3Detection *net, image im)
 
 }
 
-void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* person, PyObject* mask, PyObject* no_mask, PyObject* bbox) {
-//    char out[100];
+PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num) {
 
     std::vector<std::vector<tk::dnn::box>> batchDetected;
     batchDetected = net->get_batch_detected();
 
+    PyGILState_STATE gstate = PyGILState_Ensure();
+    PyListObject *mask = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+    PyListObject *no_mask = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+    PyListObject *person = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+
     for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
 
         if (batchDetected[batch_num][i].prob > thresh) {
-            // Build bbox
 
+            // Build bbox
+            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 4L);
             PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
             PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
             PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
@@ -94,15 +99,16 @@ void get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num
             } else if (batchDetected[batch_num][i].cl == 0) {
                 PyList_Append((PyObject*) no_mask, (PyObject*) bbox);
             }
-            // New bbox for next iteration
-            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 4L);
+
         }
     }
 
-//    PyDictObject* final_dets = (PyDictObject*) PyDict_New();
-//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
-//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("mask\0"),(PyObject*) mask);
-//    PyDict_SetItem(final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
+    PyDictObject* final_dets = (PyDictObject*) PyDict_New();
+    PyDict_SetItem((PyObject*) final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
+    PyDict_SetItem((PyObject*) final_dets, (PyObject*) PyUnicode_FromString("face_mask\0"),(PyObject*) mask);
+    PyDict_SetItem((PyObject*) final_dets, (PyObject*) PyUnicode_FromString("person\0"), (PyObject*) person);
+    PyGILState_Release(gstate);
+    return (PyObject*) final_dets;
 }
 
 

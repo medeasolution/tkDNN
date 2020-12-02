@@ -51,13 +51,14 @@ make_image.argtypes = [c_int, c_int, c_int]
 make_image.restype = IMAGE
 
 do_inference = lib.do_inference
-do_inference.argtypes = [c_void_p, IMAGE, IMAGE, IMAGE, IMAGE]
+do_inference.argtypes = [c_void_p, IMAGE]
 
 get_network_boxes = lib.get_network_boxes
 # POINTER(c_int)
-# get_network_boxes.argtypes = [c_void_p, c_float, c_int, py_object, py_object, py_object, py_object]
-get_network_boxes.argtypes = [c_void_p, c_float, c_int, POINTER(c_int)]
-get_network_boxes.restype = POINTER(DETECTION)
+get_network_boxes.argtypes = [c_void_p, c_float, c_int]
+get_network_boxes.restype = py_object
+# get_network_boxes.argtypes = [c_void_p, c_float, c_int, POINTER(c_int)]
+# get_network_boxes.restype = POINTER(DETECTION)
 
 main_loop = lib.main_loop
 main_loop.argtypes = [c_char_p, c_int]
@@ -109,27 +110,25 @@ def resizePadding(image, height, width):
     image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT)
     return image
 
-def detect_image(net, meta, darknet_images, thresh=.5):
-    do_inference(net, *darknet_images)
-
-    # person = []
-    # mask = []
-    # no_mask = []
-    # tmp_bbox = [0, 0, 0, 0]
+def detect_image(net, meta, darknet_image, thresh=.5):
     num = c_int(0)
-
     pnum = pointer(num)
-    # get_network_boxes(net, 0.3, 0, person, mask, no_mask, tmp_bbox)
-    dets = get_network_boxes(net, 0.3, 0, pnum)
-    # out = {"no_mask": no_mask, "face_mask": mask, "person": person}
-    # print(out)
+    do_inference(net, darknet_image)
+    dets = get_network_boxes(net, 0.5, 0, pnum)
     res = []
-    for i in range(pnum[0]):
-        # print(dets[i].prob)
-        b = dets[i].bbox
-        res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
-
     return res
+
+# def detect_image(net, meta, darknet_image, thresh=.5):
+#     num = c_int(0)
+#     pnum = pointer(num)
+#     do_inference(net, darknet_image)
+#     dets = get_network_boxes(net, 0.5, 0, pnum)
+#     res = []
+#     for i in range(pnum[0]):
+#         b = dets[i].bbox
+#         res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
+#
+#     return res
 
 
 def loop_detect(detect_m, video_path):
@@ -178,8 +177,8 @@ class YOLO4RT(object):
                  device='cuda'):
         self.input_size = input_size
         self.metaMain = None
-        self.model = load_network(weight_file.encode("ascii"), N_CLASSES, 4)
-        self.darknet_images = [make_image(input_size, input_size, 3) for i in range(4)]
+        self.model = load_network(weight_file.encode("ascii"), N_CLASSES, 1)
+        self.darknet_image = make_image(input_size, input_size, 3)
         self.thresh = conf_thres
         # self.resize_fn = ResizePadding(input_size, input_size)
         # self.transf_fn = transforms.ToTensor()
@@ -192,9 +191,9 @@ class YOLO4RT(object):
                                    (self.input_size, self.input_size),
                                    interpolation=cv2.INTER_LINEAR)
                 frame_data = image.ctypes.data_as(c_char_p)
-                copy_image_from_bytes(self.darknet_images[i], frame_data)
+                copy_image_from_bytes(self.darknet_image, frame_data)
 
-            detections = detect_image(self.model, self.metaMain, self.darknet_images, thresh=self.thresh)
+            detections = detect_image(self.model, self.metaMain, self.darknet_image, thresh=self.thresh)
 
             # cvDrawBoxes(detections, image)
             # cv2.imshow("1", image)
@@ -206,7 +205,7 @@ class YOLO4RT(object):
 
 
 if __name__ == '__main__':
-    input_path = "/home/alex/Projects/jd/race.mp4"
+    input_path = "/home/alex/Projects/jd/val-videos/oficina-cam0.mp4"
     detect_m = YOLO4RT(weight_file="/home/alex/Projects/jd/yolo4_int8.rt")
     t = Thread(target=loop_detect, args=(detect_m, input_path), daemon=True)
     #
