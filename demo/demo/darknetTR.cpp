@@ -70,7 +70,9 @@ void do_inference(tk::dnn::Yolo3Detection *net, image im)
 
 }
 
-PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num) {
+long cross_multiplication(float nom1, long nom2, long denom2) { return (long) ((nom1 * denom2)/nom2); }
+
+PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batch_num, PyObject* input_size, PyObject* resize_mesures) {
 
     std::vector<std::vector<tk::dnn::box>> batchDetected;
     batchDetected = net->get_batch_detected();
@@ -79,17 +81,24 @@ PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batc
     PyListObject *mask = (PyListObject*) PyList_New((Py_ssize_t) 0L);
     PyListObject *no_mask = (PyListObject*) PyList_New((Py_ssize_t) 0L);
     PyListObject *person = (PyListObject*) PyList_New((Py_ssize_t) 0L);
+    PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 4L);
+    long x, y, w, h;
 
     for (int i = 0; i < batchDetected[batch_num].size(); ++i) {
 
         if (batchDetected[batch_num][i].prob > thresh) {
 
+            // Scale boxes to frame size
+            x = cross_multiplication(batchDetected[batch_num][i].x, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1)));
+            y = cross_multiplication(batchDetected[batch_num][i].y, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1)));
+            w = cross_multiplication(batchDetected[batch_num][i].w, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0)));
+            h = cross_multiplication(batchDetected[batch_num][i].h, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0)));
+
             // Build bbox
-            PyListObject *bbox = (PyListObject*) PyList_New((Py_ssize_t) 4L);
-            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].x));
-            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].y));
-            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].w));
-            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyFloat_FromDouble((double) batchDetected[batch_num][i].h));
+            PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyLong_FromLong(x));
+            PyList_SetItem((PyObject*) bbox, 1L,(PyObject*) PyLong_FromLong(y));
+            PyList_SetItem((PyObject*) bbox, 2L,(PyObject*) PyLong_FromLong(w));
+            PyList_SetItem((PyObject*) bbox, 3L,(PyObject*) PyLong_FromLong(h));
 
             // Add the bbox to the appropriate list
             if (batchDetected[batch_num][i].cl == 2) {
@@ -102,7 +111,7 @@ PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batc
 
         }
     }
-
+    // Dict with predictions
     PyDictObject* final_dets = (PyDictObject*) PyDict_New();
     PyDict_SetItem((PyObject*) final_dets, (PyObject*) PyUnicode_FromString("no_mask\0"), (PyObject*) no_mask);
     PyDict_SetItem((PyObject*) final_dets, (PyObject*) PyUnicode_FromString("face_mask\0"),(PyObject*) mask);

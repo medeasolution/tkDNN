@@ -55,7 +55,7 @@ do_inference.argtypes = [c_void_p, IMAGE]
 
 get_network_boxes = lib.get_network_boxes
 # POINTER(c_int)
-get_network_boxes.argtypes = [c_void_p, c_float, c_int]
+get_network_boxes.argtypes = [c_void_p, c_float, c_int, py_object, py_object]
 get_network_boxes.restype = py_object
 # get_network_boxes.argtypes = [c_void_p, c_float, c_int, POINTER(c_int)]
 # get_network_boxes.restype = POINTER(DETECTION)
@@ -111,10 +111,10 @@ def resizePadding(image, height, width):
     return image
 
 def detect_image(net, meta, darknet_image, thresh=.5):
-    num = c_int(0)
-    pnum = pointer(num)
+
     do_inference(net, darknet_image)
-    dets = get_network_boxes(net, 0.5, 0, pnum)
+    dets = get_network_boxes(net, 0.5, 0, 512, [darknet_image.w, darknet_image.h])
+    # print(dets)
     res = []
     return res
 
@@ -127,7 +127,7 @@ def detect_image(net, meta, darknet_image, thresh=.5):
 #     for i in range(pnum[0]):
 #         b = dets[i].bbox
 #         res.append((dets[i].name.decode("ascii"), dets[i].prob, (b.x, b.y, b.w, b.h)))
-#
+
 #     return res
 
 
@@ -205,7 +205,7 @@ class YOLO4RT(object):
 
 
 if __name__ == '__main__':
-    input_path = "/home/alex/Projects/jd/val-videos/oficina-cam0.mp4"
+    input_path = "/home/alex/Projects/jd/val-videos/korean_walking.mp4"
     detect_m = YOLO4RT(weight_file="/home/alex/Projects/jd/yolo4_int8.rt")
     t = Thread(target=loop_detect, args=(detect_m, input_path), daemon=True)
     #
