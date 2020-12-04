@@ -89,10 +89,10 @@ PyObject* get_network_boxes(tk::dnn::Yolo3Detection *net, float thresh, int batc
         if (batchDetected[batch_num][i].prob > thresh) {
 
             // Scale boxes to frame size
-            x = cross_multiplication(batchDetected[batch_num][i].x, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1)));
-            y = cross_multiplication(batchDetected[batch_num][i].y, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1)));
-            w = cross_multiplication(batchDetected[batch_num][i].w, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0)));
-            h = cross_multiplication(batchDetected[batch_num][i].h, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0)));
+            x = cross_multiplication(batchDetected[batch_num][i].x, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1L)));
+            y = cross_multiplication(batchDetected[batch_num][i].y, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0L)));
+            w = cross_multiplication(batchDetected[batch_num][i].w, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 1L)));
+            h = cross_multiplication(batchDetected[batch_num][i].h, PyLong_AsLong(input_size), PyLong_AsLong(PyList_GetItem(resize_mesures, (Py_ssize_t) 0L)));
 
             // Build bbox
             PyList_SetItem((PyObject*) bbox, 0L,(PyObject*) PyLong_FromLong(x));
