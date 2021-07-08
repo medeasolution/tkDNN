@@ -1,0 +1,12 @@
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/install/local.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/test_yolo4tiny.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/test_yolo4.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/darknetTR.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/tkDNN.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/demo.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/install.dir

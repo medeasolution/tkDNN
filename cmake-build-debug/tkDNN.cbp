@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="tkDNN"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\eigen3\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_yolo4tiny">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/test_yolo4tiny" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_yolo4tiny"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_yolo4tiny/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/test_yolo4tiny" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_yolo4tiny/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_yolo4">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/test_yolo4" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_yolo4"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_yolo4/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/test_yolo4" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_yolo4/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="kernels">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libkernels.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 kernels"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="kernels/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libkernels.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 kernels/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="darknetTR">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libdarknetTR.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DLIB_EXPORTS=1"/>
+					<Add option="-DDEMO_EXPORTS"/>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 darknetTR"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="darknetTR/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libdarknetTR.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DLIB_EXPORTS=1"/>
+					<Add option="-DDEMO_EXPORTS"/>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 darknetTR/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tkDNN">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libtkDNN.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 tkDNN"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tkDNN/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/libtkDNN.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 tkDNN/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="demo">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/demo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 demo"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="demo/fast">
+				<Option output="/home/alex/Projects/tkDNN-python/cmake-build-debug/demo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTKDNN_PATH=&quot;/home/alex/Projects/tkDNN-python&quot;"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include/tkDNN"/>
+					<Add directory="/usr/local/TensorRT-7.2.1.6/include"/>
+					<Add directory="/usr/local/cuda/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/alex/Projects/tkDNN-python/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 demo/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/alex/Projects/tkDNN-python/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alex/Projects/tkDNN-python/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/kernels_intermediate_link.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/kernels_intermediate_link.o.rule">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_elu.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_leaky.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_logistic.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_mish.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_relu_ceiling.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_activation_sigmoid.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_convert.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_deformable_conv.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_fill.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_normalize.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_pooling.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_postprocessing.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_reorg.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_resize.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_scaladd.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_shortcut.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_softmax.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake-build-debug/CMakeFiles/kernels.dir/src/kernels/kernels_generated_upsample.cu.o">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/demo/demo/darknetTR.cpp">
+			<Option target="darknetTR"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/demo/demo/darknetTR.h">
+			<Option target="darknetTR"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/demo/demo/demo.cpp">
+			<Option target="demo"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Activation.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/BoundingBox.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/CenternetDetection.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Conv2d.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/DarknetParser.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/DeformConv2d.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Dense.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Flatten.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Int8BatchStream.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Int8Calibrator.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/LSTM.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Layer.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/LayerWgs.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/MobilenetDetection.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/MulAdd.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Network.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/NetworkRT.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/NetworkViz.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Pooling.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Region.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Reorg.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Reshape.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Route.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Shortcut.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Softmax.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Upsample.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Yolo.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/Yolo3Detection.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/evaluation.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_elu.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_leaky.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_logistic.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_mish.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_relu_ceiling.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/activation_sigmoid.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/convert.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/deformable_conv.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/fill.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/normalize.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/pooling.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/postprocessing.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/reorg.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/resize.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/scaladd.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/shortcut.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/softmax.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/kernels/upsample.cu">
+			<Option target="kernels"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/src/utils.cpp">
+			<Option target="tkDNN"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/tests/darknet/yolo4.cpp">
+			<Option target="test_yolo4"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/tests/darknet/yolo4tiny.cpp">
+			<Option target="test_yolo4tiny"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/cmake/FindCUDNN.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/lib/cmake/eigen3/Eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\eigen3\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/lib/cmake/eigen3/Eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\eigen3\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/lib/cmake/eigen3/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\eigen3\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/alex/Projects/tkDNN-python/../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,9 @@
+/etc/clion-2021.1.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/alex/Projects/tkDNN-python
+-- Found CUDNN: /usr/local/cuda/lib64/libcudnn.so
+-- Found CUDNN include: /usr/local/cuda/include
+-- Found NVINFER: /usr/local/TensorRT-7.2.1.6/lib/libnvinfer.so
+-- Found NVINFER include: NVINFER_INCLUDE_DIR-NOTFOUND
+install dir:/usr/local
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/alex/Projects/tkDNN-python/cmake-build-debug

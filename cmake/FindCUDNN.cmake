@@ -3,9 +3,10 @@ if(CUDA_FOUND)
   find_cuda_helper_libs(cudnn)
   set(CUDNN_LIBRARY ${CUDA_cudnn_LIBRARY} CACHE FILEPATH "location of the cuDNN library")
   unset(CUDA_cudnn_LIBRARY CACHE)
-
-  find_cuda_helper_libs(nvinfer)
-  set(NVINFER_LIBRARY ${CUDA_nvinfer_LIBRARY} CACHE FILEPATH "location of the nvinfer library")
+  
+  set(NVINFER_LIBRARY /usr/local/TensorRT-7.2.1.6/lib/libnvinfer.so)
+  include_directories(/usr/local/TensorRT-7.2.1.6/include) #for NvInfer.h
+  link_directories(/usr/local/TensorRT-7.2.1.6/lib/) #for cannot found -lnvinfer
   unset(CUDA_nvinfer_LIBRARY CACHE)
 endif()
 

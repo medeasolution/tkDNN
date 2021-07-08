@@ -34,7 +34,7 @@ class DetectionNN {
 
         cv::Scalar colors[256];
 
-        int nBatches = 1;
+        int nBatches = 4;
 
 #ifdef OPENCV_CUDACONTRIB
         cv::cuda::GpuMat bgr[3];
@@ -100,9 +100,9 @@ class DetectionNN {
         void update(std::vector<cv::Mat>& frames, const int cur_batches=1, bool save_times=false, std::ofstream *times=nullptr, const bool mAP=false){
             if(save_times && times==nullptr)
                 FatalError("save_times set to true, but no valid ofstream given");
-            if(cur_batches > nBatches)
+            if(cur_batches > nBatches) {
                 FatalError("A batch size greater than nBatches cannot be used");
-
+            }
             originalSize.clear();
             if(TKDNN_VERBOSE) printCenteredTitle(" TENSORRT detection ", '=', 30); 
             {
