@@ -3,37 +3,6 @@
 tkDNN is a Deep Neural Network library built with cuDNN and TensorRT primitives. The main goal of this project is to
 exploit NVIDIA boards as much as possible to obtain the best inference performance. It does not allow training.
 
-## FPS Results
-
-Inference FPS of YOLOv4 with tkDNN, average of 1200 images with the same dimension as the input size, on
-
-* RTX 2080Ti (CUDA 10.2, TensorRT 7.0.0, Cudnn 7.6.5);
-* Xavier AGX, Jetpack 4.3 (CUDA 10.0, CUDNN 7.6.3, tensorrt 6.0.1 );
-* Tx2, Jetpack 4.2 (CUDA 10.0, CUDNN 7.3.1, tensorrt 5.0.6 );
-* Jetson Nano, Jetpack 4.4  (CUDA 10.2, CUDNN 8.0.0, tensorrt 7.1.0 ).
-
-| Platform   | Network    | FP32, B=1 | FP32, B=4 | FP16, B=1 | FP16, B=4 | INT8, B=1 | INT8, B=4 | 
-| :------:   | :-----:    |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:| 
-| RTX 2080Ti | yolo4  320 |  118,59   |  237,31   |  207,81   |  443,32   |  262,37   |  530,93   | 
-| RTX 2080Ti | yolo4  416 |  104,81   |  162,86   |  169,06   |  293,78   |  206,93   |  353,26   | 
-| RTX 2080Ti | yolo4  512 |   92,98   |  132,43   |  140,36   |  215,17   |  165,35   |  254,96   | 
-| RTX 2080Ti | yolo4  608 |   63,77   |   81,53   |  111,39   |  152,89   |  127,79   |  184,72   | 
-
-## MAP Results
-
-Results for COCO val 2017 (5k images), on RTX 2080Ti, with conf threshold=0.001
-
-|                      | CodaLab       | CodaLab   | CodaLab       | CodaLab     | tkDNN map     | tkDNN map |
-| -------------------- | :-----------: | :-------: | :-----------: | :---------: | :-----------: | :-------: |
-|                      | **tkDNN**     | **tkDNN** | **darknet**   | **darknet** | **tkDNN**     | **tkDNN** |
-|                      | MAP(0.5:0.95) | AP50      | MAP(0.5:0.95) | AP50        | MAP(0.5:0.95) | AP50      |
-| Yolov3 (416x416)     | 0.381         | 0.675     | 0.380         | 0.675       | 0.372         | 0.663     |
-| yolov4 (416x416)     | 0.468         | 0.705     | 0.471         | 0.710       | 0.459         | 0.695     |
-| yolov3tiny (416x416) | 0.096         | 0.202     | 0.096         | 0.201       | 0.093         | 0.198     |
-| yolov4tiny (416x416) | 0.202         | 0.400     | 0.201         | 0.400       | 0.197         | 0.395     |
-| Cnet-dla34 (512x512) | 0.366         | 0.543     | \-            | \-          | 0.361         | 0.535     |
-| mv2SSD (512x512)     | 0.226         | 0.381     | \-            | \-          | 0.223         | 0.378     |
-
 ## Dependencies
 
 This branch works on every NVIDIA GPU that supports the dependencies:
@@ -71,6 +40,7 @@ make -j8
 ```
 
 ## Workflow
+
 First, this workflow can be easily automated with a bash script, and it's planned to do it in the future.
 
 Steps needed to do inference on tkDNN with a custom neural network.
@@ -135,6 +105,7 @@ After that, you will have the TensorRT engine with FP32 precision in the same fo
 you should first run `export TKDNN_MODE=FP16` as defined in next section.
 
 ### FP16 inference
+
 N.b. By default it is used FP32 inference
 
 To run the an object detection demo with FP16 inference follow these steps:
@@ -237,8 +208,6 @@ where
 * ```<conf-thresh>``` confidence threshold for the detector. Only bounding boxes with threshold greater than conf-thresh
   will be displayed.
 
-
-
 ![demo](https://user-images.githubusercontent.com/11562617/72547657-540e7800-388d-11ea-83c6-49dfea2a0607.gif)
 
 ## PYTHON
@@ -248,6 +217,37 @@ To run the an object detection demo with python (example with yolov4):
 ```
 python darknetTR.py build/yolo4_fp16.rt --video=demo/yolo_test.mp4
 ```
+
+## FPS Results
+
+Inference FPS of YOLOv4 with tkDNN, average of 1200 images with the same dimension as the input size, on
+
+* RTX 2080Ti (CUDA 10.2, TensorRT 7.0.0, Cudnn 7.6.5);
+* Xavier AGX, Jetpack 4.3 (CUDA 10.0, CUDNN 7.6.3, tensorrt 6.0.1 );
+* Tx2, Jetpack 4.2 (CUDA 10.0, CUDNN 7.3.1, tensorrt 5.0.6 );
+* Jetson Nano, Jetpack 4.4  (CUDA 10.2, CUDNN 8.0.0, tensorrt 7.1.0 ).
+
+| Platform   | Network    | FP32, B=1 | FP32, B=4 | FP16, B=1 | FP16, B=4 | INT8, B=1 | INT8, B=4 | 
+| :------:   | :-----:    |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:| 
+| RTX 2080Ti | yolo4  320 |  118,59   |  237,31   |  207,81   |  443,32   |  262,37   |  530,93   | 
+| RTX 2080Ti | yolo4  416 |  104,81   |  162,86   |  169,06   |  293,78   |  206,93   |  353,26   | 
+| RTX 2080Ti | yolo4  512 |   92,98   |  132,43   |  140,36   |  215,17   |  165,35   |  254,96   | 
+| RTX 2080Ti | yolo4  608 |   63,77   |   81,53   |  111,39   |  152,89   |  127,79   |  184,72   | 
+
+## MAP Results
+
+Results for COCO val 2017 (5k images), on RTX 2080Ti, with conf threshold=0.001
+
+|                      | CodaLab       | CodaLab   | CodaLab       | CodaLab     | tkDNN map     | tkDNN map |
+| -------------------- | :-----------: | :-------: | :-----------: | :---------: | :-----------: | :-------: |
+|                      | **tkDNN**     | **tkDNN** | **darknet**   | **darknet** | **tkDNN**     | **tkDNN** |
+|                      | MAP(0.5:0.95) | AP50      | MAP(0.5:0.95) | AP50        | MAP(0.5:0.95) | AP50      |
+| Yolov3 (416x416)     | 0.381         | 0.675     | 0.380         | 0.675       | 0.372         | 0.663     |
+| yolov4 (416x416)     | 0.468         | 0.705     | 0.471         | 0.710       | 0.459         | 0.695     |
+| yolov3tiny (416x416) | 0.096         | 0.202     | 0.096         | 0.201       | 0.093         | 0.198     |
+| yolov4tiny (416x416) | 0.202         | 0.400     | 0.201         | 0.400       | 0.197         | 0.395     |
+| Cnet-dla34 (512x512) | 0.366         | 0.543     | \-            | \-          | 0.361         | 0.535     |
+| mv2SSD (512x512)     | 0.226         | 0.381     | \-            | \-          | 0.223         | 0.378     |
 
 ## Existing tests and supported networks
 
